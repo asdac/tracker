@@ -1,0 +1,53 @@
+<section class="row" data-ng-controller="SettingsController">
+	<div id="loginbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+		<div class="panel panel-warning" >
+			<div class="panel-heading">
+				<div class="panel-title">Ediy Profile</div>
+			</div>
+			<div style="padding-top:30px" class="panel-body" >
+				<div data-ng-show="success" class="text-center text-success">
+					<strong>Profile Saved Successfully</strong>
+				</div>
+				<div data-ng-show="error" class="text-center text-danger">
+					<strong data-ng-bind="error"> {{error}}</strong>
+				</div>
+		<form novalidate name="userForm" data-ng-submit="updateUserProfile(userForm.$valid)" class="signin form-horizontal" autocomplete="off">
+			<fieldset>
+				<div style="margin-bottom: 25px" class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user"></i></span>
+					<label id="username" type="text" class="form-control" name="username">{{user.username}}</label>
+				</div>
+				<div style="margin-bottom: 25px" class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user"></i></span>
+					<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="user.firstName" required>
+				</div>
+				<div style="margin-bottom: 25px" class="input-group">
+					<span class="input-group-addon"><i class="fa fa-user"></i></span>
+					<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="user.lastName" required>
+				</div>
+				<div style="margin-bottom: 25px" class="input-group">
+					<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+					<input type="email" id="email" name="email" class="form-control" data-ng-model="user.email" required>
+				</div>
+				<div style="margin-bottom: 25px" class="input-group">
+					<span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+					<input type="date" id="dob-day" name="dob" class="form-control" data-ng-model="user.dob" required>
+				</div>
+				<div style="margin-bottom: 25px">
+					<input type="radio"  id="genderM" name="gender" data-ng-model="user.gender" value="male">Male</radio>
+					<input type="radio"  id="genderF" name="gender" data-ng-model="user.gender" value="female">Female</radio>
+				</div>
+				<div class="form-group">
+					<!-- Button -->
+					<div class="col-sm-12 controls">
+						<div style="margin-bottom: 25px">
+							<button type="submit" id="btn-signup" class="btn btn-success btn-block" ng-disable="userForm.!$valid">
+								Save
+							</button>
+						</div>
+					</div>
+				</div>
+			</fieldset>
+		</form>
+	</div>
+</section>
