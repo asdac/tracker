@@ -49,9 +49,10 @@ var UserSchema = new Schema({
 		match: [/.+\@.+\..+/, 'Please fill a valid email address']
 	},
 	gender: {
-		type: String,
-		trim: true,
-		default: '',
+		type:  {
+			type: String,
+			enum: ['male', 'female']
+		},
 		validate: [validateLocalStrategyProperty, 'Please select your gender']
 	},
 	dob: {
@@ -60,9 +61,7 @@ var UserSchema = new Schema({
 	},
 	username: {
 		type: String,
-		unique: 'testing error message',
-		required: 'Please fill in a username',
-		trim: true
+		unique: 'testing error message'
 	},
 	password: {
 		type: String,
@@ -81,10 +80,22 @@ var UserSchema = new Schema({
 	roles: {
 		type: [{
 			type: String,
-			enum: ['user', 'trainer','admin']
+			enum: ['user', 'trainer', 'admin']
 		}],
 		default: ['user']
 	},
+	clients: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Client'
+		}
+	],
+	measurements: [
+		{
+			type: Schema.Types.ObjectId,
+			ref: 'Measurement'
+		}
+	],
 	updated: {
 		type: Date
 	},

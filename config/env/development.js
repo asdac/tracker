@@ -6,8 +6,8 @@ module.exports = {
 		title: 'Tracker - Development Environment'
 	},
 	facebook: {
-		clientID: process.env.FACEBOOK_ID || 'APP_ID',
-		clientSecret: process.env.FACEBOOK_SECRET || 'APP_SECRET',
+		clientID: process.env.FACEBOOK_ID || '1427484354218281',
+		clientSecret: process.env.FACEBOOK_SECRET || '1feeddbb610866ff1ee64ed1700e307c',
 		callbackURL: '/auth/facebook/callback'
 	},
 	twitter: {
@@ -20,15 +20,10 @@ module.exports = {
 		clientSecret: process.env.GOOGLE_SECRET || 'APP_SECRET',
 		callbackURL: '/auth/google/callback'
 	},
-	linkedin: {
-		clientID: process.env.LINKEDIN_ID || 'APP_ID',
-		clientSecret: process.env.LINKEDIN_SECRET || 'APP_SECRET',
-		callbackURL: '/auth/linkedin/callback'
-	},
-	github: {
-		clientID: process.env.GITHUB_ID || 'APP_ID',
-		clientSecret: process.env.GITHUB_SECRET || 'APP_SECRET',
-		callbackURL: '/auth/github/callback'
+	fitbit: {
+		clientID: process.env.FIRBIT_ID || 'bb6c56c748d44b60876a5d7d61bb52b0',
+		clientSecret: process.env.FITBIT_SECRET || '57d74a3f78f443c89322f8fabefe2c6c',
+		callbackURL: '/auth/fitbit/callback'
 	},
 	mailer: {
 		from: process.env.MAILER_FROM || 'MAILER_FROM',
