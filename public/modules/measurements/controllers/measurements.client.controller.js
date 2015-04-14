@@ -17,15 +17,18 @@ measurementsApp.controller('MeasurementsController', ['$scope', '$stateParams', 
 				}];
 			for (var i = 0; i < measurements.length; i++) {
 				var measurement = measurements[i];
-				$scope.exampleData[0].values.push([new Date(measurement.taken), measurement.bicep]);
+				$scope.exampleData[0].values.push([(new Date(measurement.taken)).setHours(0,0,0,0), measurement.bicep]);
 			}
 		});
 
-
+		this.xAxisTickFormatFunction = function(){
+			return function(d){
+				return d3.time.format('%e/%m/%y')(new Date(d)); //uncomment for date format
+			};
+		};
 
 		this.update = function(updatedMeasurement) {
 			var measurement = updatedMeasurement;
-
 			measurement.$update(function() {
 				Notify.sendMsg('NewMeasurement', {'id': measurement._id});
 			}, function(errorResponse) {
@@ -60,6 +63,7 @@ measurementsApp.controller('MeasurementsController', ['$scope', '$stateParams', 
 						$scope.measurements.splice(i, 1);
 					}
 				}
+				Notify.sendMsg('NewMeasurement', {'id': measurement._id});
 			} else {
 				this.measurement.$remove(function() {
 				});
@@ -84,7 +88,7 @@ measurementsApp.directive('chart', ['Measurements','Notify', '$log',function(Mea
 						}];
 					for (var i = 0; i < measurements.length; i++) {
 						var measurement = measurements[i];
-						scope.exampleData[0].values.push([new Date(measurement.taken), measurement.bicep]);
+						scope.exampleData[0].values.push([(new Date(measurement.taken)).setHours(0,0,0,0), measurement.bicep]);
 					}
 
 				});
