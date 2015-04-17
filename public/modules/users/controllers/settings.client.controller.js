@@ -4,6 +4,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 	function($scope, $http, $location, Users, Authentication) {
 		$scope.user = Authentication.user;
 
+
 		// If user is not signed in then redirect back home
 		if (!$scope.user) $location.path('/');
 
@@ -43,7 +44,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			if (isValid) {
 				$scope.success = $scope.error = null;
 				var user = new Users($scope.user);
-
 				user.$update(function(response) {
 					$scope.success = true;
 					Authentication.user = response;
@@ -66,6 +66,32 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
 			}).error(function(response) {
 				$scope.error = response.message;
 			});
+		};
+
+		$scope.roles = ['user', 'trainer', 'admin'];
+
+		$scope.isChecked = function (role) {
+			var match = false;
+			for (var i = 0; i < $scope.user.roles.length; i++) {
+				if ($scope.user.roles[i] === role) {
+					match = true;
+				}
+			}
+			return match;
+		};
+
+		$scope.sync = function (bool, role) {
+			if (bool) {
+				// add item
+				$scope.user.roles.push(role);
+			} else {
+				// remove item
+				for (var i = 0; i < $scope.user.roles.length; i++) {
+					if ($scope.user.roles[i] === role) {
+						$scope.user.roles.splice(i, 1);
+					}
+				}
+			}
 		};
 	}
 ]);

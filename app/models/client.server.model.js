@@ -10,8 +10,8 @@ var mongoose = require('mongoose'),
  * Client Schema
  */
 var ClientSchema = new Schema({
-	client: {
-		type: Schema.Types.ObjectId,
+	profile: {
+		type: Schema.ObjectId,
 		ref: 'User'
 	},
 	created: {

@@ -14,7 +14,8 @@ var mongoose = require('mongoose'),
 exports.create = function(req, res) {
 	var client = new Client(req.body);
 	client.user = req.user;
-
+	console.log(req.body);
+	console.log(client);
 	client.save(function(err) {
 		if (err) {
 			return res.status(400).send({
@@ -72,14 +73,15 @@ exports.delete = function(req, res) {
 /**
  * List of Clients
  */
-exports.list = function(req, res) { 
-	Client.find().sort('-created').populate('user', 'displayName').exec(function(err, clients) {
+exports.list = function(req, res) {
+	Client.find().where('user', req.query.user).populate('user profile').sort('lastName').exec(function (err, clients) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			res.jsonp(clients);
+			console.log(res.jsonp);
 		}
 	});
 };
@@ -87,8 +89,8 @@ exports.list = function(req, res) {
 /**
  * Client middleware
  */
-exports.clientByID = function(req, res, next, id) { 
-	Client.findById(id).populate('user', 'displayName').exec(function(err, client) {
+exports.clientByID = function(req, res, next, id) {
+	Client.findById(id).populate('user profile').exec(function (err, client) {
 		if (err) return next(err);
 		if (! client) return next(new Error('Failed to load Client ' + id));
 		req.client = client ;

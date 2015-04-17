@@ -1,19 +1,40 @@
-<section data-ng-controller="ClientsController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Clients</h1>
+<section data-ng-controller="ClientsController as clientsCtrl">
+
+    <div class="col-sm-5 panel panel-default off-canvas-sidebar" id="sidebar">
+
+        <clients></clients>
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="client in clients" data-ng-href="#!/clients/{{client._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="client.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="client.user.displayName"></span>
-			</small>
-			<h4 class="list-group-item-heading" data-ng-bind="client.name"></h4>
-        </a>
+    <div class="col-sm-7 push-right">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{clientsCtrl.client.profile.displayName}}</h3>
+            </div>
+            <div class="panel-body">
+                <table class="table table-user-information">
+                    <tbody>
+                    <tr>
+                        <td>Email</td>
+                        <td>
+                            <a href="mailto:{{clientsCtrl.client.profile.email}}">{{clientsCtrl.client.profile.email}}</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Date of birth:</td>
+                        <td>{{clientsCtrl.client.profile.dob | date: medium}}</td>
+                    </tr>
+                    <tr>
+                        <td>Phone Number</td>
+                        <td>123-4567-890(Landline)<br><br>555-4567-890(Mobile)
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <a ng-click="clientsCtrl.remove(clientsCtrl.client)"><i class="fa fa-trash-o"></i></a>
+            </div>
+        </div>
     </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!clients.$resolved || clients.length">
-    	No Clients yet, why don't you <a href="/#!/clients/create">create one</a>?
-    </div>
+
 </section>

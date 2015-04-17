@@ -6,7 +6,7 @@
 var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
 	crypto = require('crypto');
-
+mongoose.set('debug', true);
 /**
  * A Validation function for local strategy properties
  */
